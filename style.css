@@ -1,0 +1,159 @@
+h1{color:red;}
+.dir{margin-bottom:0px;}
+.arrow-direction{position:relative;}
+ul.directions {
+    list-style: none;
+    margin: 0;
+}
+ul.directions li{position:absolute;}
+ul#directions1 li:nth-child(1){
+	top: 20px;
+    left: 250px;
+}
+ul#directions1 li:nth-child(2){
+	top: 100px;
+    left: 370px;
+}
+ul#directions1 li:nth-child(3){
+	top: 180px;
+    left: 250px;
+}
+ul#directions1 li:nth-child(4){
+	top: 100px;
+    left: 130px;
+}
+ul#directions2 li:nth-child(1){
+	top: 50px;
+    left: 330px;
+}
+ul#directions2 li:nth-child(2){
+	top: 150px;
+    left: 330px;
+}
+ul#directions2 li:nth-child(3){
+	top: 150px;
+    left: 180px;
+}
+ul#directions2 li:nth-child(4){
+	top: 60px;
+    left: 180px;
+}
+
+#triangleDirection {
+    display: block;
+    clear: both;
+    position: absolute;
+    width: 70px;
+    height: 45px;
+	left:245px;
+	top:82px;
+}
+.corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+}
+.corners.rotate-45 {
+    width: 54px;
+    height: 54px;
+    margin: 4px 0 0 4px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.corners .topRight, .corners .top {
+    top: 0;
+    right: 0;
+}
+.corners .bottomRight, .corners .right {
+    bottom: 0;
+    right: 0;
+}
+.corners .bottomLeft, .corners .bottom {
+    bottom: 0;
+    left: 0;
+}
+.corners .topLeft, .corners .left {
+    top: 0;
+    left: 0;
+}
+.corners > label {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #0094FF;
+    cursor: pointer;
+	margin:0;
+}
+.corners.rotate-45 > label {
+    width: 27px;
+    height: 27px;
+    background: #77F1FF;
+	margin:0;
+}
+.corners .topRight, .corners .top {
+    top: 0;
+    right: 0;
+}
+.corners .bottomLeft, .corners .bottom {
+    bottom: 0;
+    left: 0;
+}
+.corners .bottomRight, .corners .right {
+    bottom: 0;
+    right: 0;
+}
+.corners .topLeft, .corners .left {
+    top: 0;
+    left: 0;
+}
+#centerFill {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 38px;
+    height: 38px;
+    background: #fff;
+}
+#triangleOutput {
+    display: block;
+    height: 300px;
+    width: 100%;
+    background: url(transparent.png) 0 0 repeat;
+}
+.corners > label:hover {
+    background: #FF77F1;
+}
+#triangle {
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    border-style: solid;
+    width: 0px;
+    height: 0px;
+    line-height: 0px;
+    border-width: 0px 100px 100px 100px;
+    border-color: transparent transparent #AB2567 transparent;
+    _border-color: #000 #000 #AB2567 #000;
+    _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+}
+.sizing{margin-top:250px;}
+.sizing ul{margin:0;list-style:none;}
+.sizing li{clear:both;}
+.color{margin-top:20px;}
+#cssOutput {
+    display: block;
+    width: 100%;
+    height: 150px;
+    background: #fff;
+    position: relative;
+}
+.selected-top .triangle.top, .selected-bottom .triangle.bottom, .selected-left .triangle.left, .selected-right .triangle.right, .selected-topRight .triangle.topRight, .selected-bottomRight .triangle.bottomRight, .selected-bottomLeft .triangle.bottomLeft, .selected-topLeft .triangle.topLeft {
+    background: #FF77F1;
+}

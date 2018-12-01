@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Arrow Generator</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="container">
+  <div class="row">
+	<div class="col-xl-12  text-center">
+		<h1>CSS Triangle Generator</h1>
+	</div>
+  </div>
+  <div class="row">
+	<div class="col-xl-6">
+		<div class="dir">
+			<h4>Direction</h4>
+		</div>
+		<div class="arrow-direction">
+			<ul class="directions" id="directions1">
+				<li>
+					<input type="radio" name="direction" id="direction-top" value="top" checked>
+					<label for="direction-top">Top</label>
+				</li>
+				<li>
+					<input type="radio" name="direction" id="direction-right" value="right">
+					<label for="direction-right">Right</label>
+				</li>
+				<li>
+					<input type="radio" name="direction" id="direction-bottom" value="bottom">
+					<label for="direction-bottom">Bottom</label>
+				</li>
+				<li>
+					<input type="radio" name="direction" id="direction-left" value="left">
+					<label for="direction-left">Left</label>
+				</li>
+			</ul>
+			<ul class="directions" id="directions2">
+				<li>
+					<input type="radio" name="direction" id="direction-topRight" value="topRight">
+					<label for="direction-topRight">Top right</label>
+				</li>
+							<li>
+					<input type="radio" name="direction" id="direction-bottomRight" value="bottomRight">
+					<label for="direction-bottomRight">Bottom Right</label>
+				</li>
+				<li>
+					<input type="radio" name="direction" id="direction-bottomLeft" value="bottomLeft">
+					<label for="direction-bottomLeft">Bottom Left</label>
+				</li>
+				<li>
+					<input type="radio" name="direction" id="direction-topLeft" value="topLeft">
+					<label for="direction-topLeft">Top Left</label>
+				</li>
+			</ul>
+			<div id="triangleDirection" class="selected-top">
+				<div class="corners">
+					<label for="direction-topRight" class="triangle topRight"></label>
+					<label for="direction-bottomRight" class="triangle bottomRight"></label>
+					<label for="direction-bottomLeft" class="triangle bottomLeft"></label>
+					<label for="direction-topLeft" class="triangle topLeft"></label>
+				</div>
+				<div class="corners rotate-45">
+					<label for="direction-top" class="triangle top"></label>
+					<label for="direction-bottom" class="triangle bottom"></label>
+					<label for="direction-right" class="triangle right"></label>
+					<label for="direction-left" class="triangle left"></label>
+				</div>
+				<div role="img" id="centerFill"></div>
+			</div>
+		</div>
+		<div class="sizing">
+			<div class="dir">
+				<h4>Size</h4>
+			</div>
+			<ul>
+			<li>
+				<label for="width">Width</label>
+				<input name="width" id="width" value="200" type="number">px
+				<ul>
+					<li>
+						<label for="width-left">Left</label>
+						<input name="width-left" id="width-left" value="100" type="number" disabled>px
+					</li>
+					<li>
+						<label for="width-right">Right</label>
+						<input name="width-right" id="width-right" value="100" type="number" disabled>px
+					</li>
+				</ul>
+			</li>
+			<li>
+				<label for="height">Height</label>
+				<input name="height" id="height" value="200" type="number">px
+				<ul>
+					<li>
+						<label for="height-top">Top</label>
+						<input name="height-top" id="height-top" value="100" type="number" disabled>px
+					</li>
+					<li>
+						<label for="height-bottom">Bottom</label>
+						<input name="height-bottom" id="height-bottom" value="100" type="number" disabled>px
+					</li>
+				</ul>
+			</li>
+			</ul>
+			
+		</div>
+		<div class="color">
+			Color: <input class="jscolor" value="ab2567" id="colorCode">
+			<button type="button" id="update">Update</button>
+		</div>
+	</div>
+	<div class="col-xl-6">
+		<div id="triangleOutput">
+			<div id="triangle" style="border-color: transparent transparent #AB2567 transparent; border-width: 0px 100px 200px 100px;"></div>
+		</div>
+		<div id="cssOutput">
+			<h1>CSS</h1>
+			<div class="details">
+				<div>width: 0;</div>
+				<div>height: 0;</div>
+				<div>border-style: solid;</div>
+				<div class="disp-borderWidth">border-width: 0 100px 100px 100px;</div>
+				<div class="disp-border">border-color: transparent transparent <span id='colorC'>#AB2567</span> transparent;</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="jscolor.js"></script>
+<script>
+$(document).ready(function(){
+	var chTri = $('#triangle');
+	var generatorFunction = {
+		widthCalc : function(element){
+			var value = $(element).val();
+			 return value;
+		},
+		colorTri: function(){
+			var Bcolr = $('#colorC');
+			var col = $('#colorCode').val();
+			var res = col.replace(col, "#"+ col);
+			Bcolr.text(res);
+			return res;
+		},
+		
+		textDisp: function(){
+				var str =  chTri.attr('style');
+				var res = str.split(";");
+				$('.disp-borderWidth').text(res[0] + ";");
+				$('.disp-border').text(res[1] + ";");
+		},
+		
+		selection : function (element){
+		var getChk = $(element).attr('value');
+		var triDir = $('#triangleDirection');
+		
+		triDir.removeAttr('class').attr('class', 'selected-'+ getChk);
+		switch(getChk){
+			case  'top':{
+				chTri.removeAttr('style').attr('style', 'border-width: 0px '+ generatorFunction.widthCalc($('#width'))/2 +'px '+ generatorFunction.widthCalc($('#height')) +'px ' + generatorFunction.widthCalc($('#width'))/2 +'px ;border-color: transparent transparent '+ generatorFunction.colorTri() +' transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'topRight':{
+				chTri.removeAttr('style').attr('style', 'border-width: 0px '+ generatorFunction.widthCalc($('#width')) +'px '+ generatorFunction.widthCalc($('#width')) +'px 0px;border-color: transparent '+ generatorFunction.colorTri() + ' transparent transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'right':{
+				chTri.removeAttr('style').attr('style', 'border-width: '+ generatorFunction.widthCalc($('#width'))/2 +'px 0px '+ generatorFunction.widthCalc($('#width'))/2 +'px '+ generatorFunction.widthCalc($('#width')) +'px;border-color: transparent transparent transparent '+ generatorFunction.colorTri() + ';');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'bottomRight':{
+				chTri.removeAttr('style').attr('style', 'border-width: 0px 0px '+ generatorFunction.widthCalc($('#width')) +'px '+ generatorFunction.widthCalc($('#width')) +'px ;border-color: transparent transparent '+ generatorFunction.colorTri() + ' transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'bottom':{
+				chTri.removeAttr('style').attr('style', 'border-width: '+ generatorFunction.widthCalc($('#width')) +'px '+ generatorFunction.widthCalc($('#width'))/2 +'px 0px '+ generatorFunction.widthCalc($('#width'))/2 +'px;border-color:  '+ generatorFunction.colorTri() + ' transparent transparent transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'bottomLeft':{
+				chTri.removeAttr('style').attr('style', 'border-width: '+ generatorFunction.widthCalc($('#width')) +'px 0px 0px '+ generatorFunction.widthCalc($('#width')) +'px;border-color: transparent transparent transparent '+ generatorFunction.colorTri() + ';');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'left':{
+				chTri.removeAttr('style').attr('style', 'border-width: '+ generatorFunction.widthCalc($('#width'))/2 +'px '+ generatorFunction.widthCalc($('#width')) +'px '+ generatorFunction.widthCalc($('#width'))/2 +'px 0px;border-color: transparent '+ generatorFunction.colorTri() + ' transparent transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+			case  'topLeft':{
+				chTri.removeAttr('style').attr('style', 'border-width: '+ generatorFunction.widthCalc($('#width')) +'px '+ generatorFunction.widthCalc($('#width')) +'px 0px 0px;border-color:  '+ generatorFunction.colorTri() + ' transparent transparent transparent;');
+				generatorFunction.textDisp();
+			break;
+			}
+		
+		}
+	}
+	
+	}	
+	$('[name="direction"]').on('click', function(){
+		generatorFunction.selection($(this));
+	})
+	$('#update').on('click', function(){
+		generatorFunction.colorTri();
+		generatorFunction.selection($('[name="direction"]:checked'));
+	})
+	$('[type="number"]').on('input', function(){
+		generatorFunction.selection($('[name="direction"]:checked'));
+		$('#width-left, #width-right').val(generatorFunction.widthCalc($('#width'))/2);
+		$('#height-top, #height-bottom').val(generatorFunction.widthCalc($('#height'))/2);
+	});
+	$('.jscolor').on('change keyup', function(){
+		$('#update').trigger('click');
+	})
+});
+</script>
+</body>
+</html>
